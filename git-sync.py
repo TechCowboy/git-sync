@@ -64,30 +64,8 @@ for dir in git_dirs:
                 print(f"{'Pulling lastest files':26} {dir}")
                 result = subprocess.run(['git', 'pull'], stdout=subprocess.PIPE)
                 pull_info += result.stdout.decode('utf-8')
+        else:
+            total_up_to_date += 1
 
 
 print(f"{total_up_to_date} repositories are up to date")        
-        
-    
-"""
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-	modified:   examples/adam-smartkeys/Makefile
-	modified:   examples/adam-smartkeys/src/main.c
-	modified:   src/smartkeys.h
-	modified:   src/smartkeys_putc.c
-	modified:   src/smartkeys_puts.c
-	modified:   src/smartkeys_sound_init.c
-	modified:   src/smartkeys_sound_play.c
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-	build/
-	examples/adam-smartkeys/adam-smartkeys
-	examples/adam-smartkeys/adam-smartkeys.ddp
-	examples/adam-smartkeys/adam-smartkeys.map
-	examples/adam-smartkeys/adam-smartkeys_BOOTSTRAP.bin
-	examples/adam-smartkeys/build/
-	smartkeys.lib
-"""
