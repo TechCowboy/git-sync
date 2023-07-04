@@ -5,7 +5,7 @@ import subprocess
 
 debug = 1
 
-print("Checking to see if we have out of day repositories...")
+print("Finding local git repositories...")
 cwd = os.getcwd()
 
 if debug:
@@ -22,7 +22,8 @@ for dir in all_dirs:
 
 total_dirs = len(git_dirs)
 print(f"{total_dirs} git directories found")
-print("Updating the latest status on the remote sites")
+print("Getting the latest status on each remote repositories...")
+status_size = 45
 for dir in git_dirs:
     os.chdir(dir)
     count = f"{total_dirs}"
@@ -50,7 +51,7 @@ for dir in git_dirs:
     if uptodate:
         if modified:
             but_modified = "but modified"
-            print(f"{latest_but_modified:26} {dir}")
+            print(f"{latest_but_modified:45} {dir}")
         else:
             but_modified = ""
             total_up_to_date += 1
@@ -59,13 +60,13 @@ for dir in git_dirs:
         
         if behind:           
             if modified:
-                print(f"{'Behind but files modified':26} {dir}")
+                print(f"{'Behind but files modified':45} {dir}")
             else:
-                print(f"{'Pulling lastest files':26} {dir}")
+                print(f"{'Pulling lastest files':45} {dir}")
                 result = subprocess.run(['git', 'pull'], stdout=subprocess.PIPE)
                 pull_info += result.stdout.decode('utf-8')
         else:
             total_up_to_date += 1
 
-
+print()
 print(f"{total_up_to_date} repositories are up to date")        
