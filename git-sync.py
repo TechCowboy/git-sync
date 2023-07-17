@@ -61,10 +61,14 @@ for dir in git_dirs:
         if behind:           
             if modified:
                 print(f"{'Behind but files modified':45} {dir}")
+                result = subprocess.run(['git', 'pull'], stdout=subprocess.PIPE)
+                pull_info += result.stdout.decode('utf-8')
+                print(pull_info)
             else:
                 print(f"{'Pulling lastest files':45} {dir}")
                 result = subprocess.run(['git', 'pull'], stdout=subprocess.PIPE)
                 pull_info += result.stdout.decode('utf-8')
+                print(pull_info)
         else:
             total_up_to_date += 1
 
